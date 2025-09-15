@@ -40,4 +40,11 @@ Type conversions
 int() -> Converts to integer data type
 float() -> Converts to float data type
 str() -> Converts to string data type
-bool() -> Converts to boolean data type
+bool() -> Converts to boolean data type 
+
+OPERATORS:
+RELATIONAL : <,>,==,<=,>=
+Conditional: and,or,not Logical AND Operator gives True if all the booleans are true.
+Logical OR Operator gives True if any of the booleans are true.
+Logical NOT Operator gives the opposite value
+
