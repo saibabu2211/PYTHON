@@ -36,3 +36,8 @@ Some Examples
 "Hello World!"
 "some@example.com"
 "1234"
+Type conversions
+int() -> Converts to integer data type
+float() -> Converts to float data type
+str() -> Converts to string data type
+bool() -> Converts to boolean data type
