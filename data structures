@@ -1,0 +1,60 @@
+Absolutely, saibabu! Here's a **single unified table** that lists the most commonly used methods for **lists**, **tuples**, **dictionaries**, and **sets** in Python 🐍 — all in one place for easy reference:
+
+---
+
+### 🧠 Python Data Structure Methods (Unified Table)
+
+| Data Type     | Method                          | Description                                                                 |
+|---------------|----------------------------------|-----------------------------------------------------------------------------|
+| **List**      | `append(x)`                     | Adds item `x` to the end of the list                                        |
+| **List**      | `extend(iterable)`              | Adds all items from an iterable to the list                                 |
+| **List**      | `insert(i, x)`                  | Inserts item `x` at position `i`                                             |
+| **List**      | `remove(x)`                     | Removes first occurrence of item `x`                                        |
+| **List**      | `pop([i])`                      | Removes and returns item at index `i` (last item if `i` not provided)       |
+| **List**      | `clear()`                       | Removes all items from the list                                             |
+| **List**      | `index(x[, start[, end]])`      | Returns index of first occurrence of `x`                                    |
+| **List**      | `count(x)`                      | Returns number of occurrences of `x`                                        |
+| **List**      | `sort(key=None, reverse=False)` | Sorts the list in ascending order                                           |
+| **List**      | `reverse()`                     | Reverses the list in place                                                  |
+| **List**      | `copy()`                        | Returns a shallow copy of the list                                          |
+| **Tuple**     | `count(x)`                      | Returns number of occurrences of `x`                                        |
+| **Tuple**     | `index(x)`                      | Returns index of first occurrence of `x`                                    |
+| **Dict**      | `clear()`                       | Removes all items from the dictionary                                       |
+| **Dict**      | `copy()`                        | Returns a shallow copy of the dictionary                                    |
+| **Dict**      | `fromkeys(seq[, v])`            | Creates a new dictionary with keys from `seq` and values set to `v`         |
+| **Dict**      | `get(key[, default])`           | Returns value for `key`, or `default` if key not found                      |
+| **Dict**      | `items()`                       | Returns a view object of key-value pairs                                    |
+| **Dict**      | `keys()`                        | Returns a view object of dictionary keys                                    |
+| **Dict**      | `pop(key[, default])`           | Removes key and returns its value                                           |
+| **Dict**      | `popitem()`                     | Removes and returns last inserted key-value pair                            |
+| **Dict**      | `setdefault(key[, default])`    | Returns value of `key`, sets it to `default` if not found                   |
+| **Dict**      | `update([other])`               | Updates dictionary with key-value pairs from `other`                        |
+| **Dict**      | `values()`                      | Returns a view object of dictionary values                                  |
+| **Set**       | `add(x)`                        | Adds element `x` to the set                                                 |
+| **Set**       | `clear()`                       | Removes all elements from the set                                           |
+| **Set**       | `copy()`                        | Returns a shallow copy of the set                                           |
+| **Set**       | `difference(*others)`           | Returns elements in set but not in `others`                                 |
+| **Set**       | `difference_update(*others)`    | Removes elements found in `others`                                          |
+| **Set**       | `discard(x)`                    | Removes element `x` if present                                              |
+| **Set**       | `intersection(*others)`         | Returns common elements in all sets                                         |
+| **Set**       | `intersection_update(*others)`  | Updates set with common elements                                            |
+| **Set**       | `isdisjoint(other)`             | Returns `True` if sets have no elements in common                           |
+| **Set**       | `issubset(other)`               | Returns `True` if set is subset of `other`                                  |
+| **Set**       | `issuperset(other)`             | Returns `True` if set is superset of `other`                                |
+| **Set**       | `pop()`                         | Removes and returns an arbitrary element                                    |
+| **Set**       | `remove(x)`                     | Removes element `x`, raises error if not found                              |
+| **Set**       | `symmetric_difference(other)`   | Returns elements in either set but not both                                 |
+| **Set**       | `symmetric_difference_update(other)` | Updates set with symmetric difference                                 |
+| **Set**       | `union(*others)`                | Returns union of sets                                                       |
+| **Set**       | `update(*others)`               | Adds elements from `others` to the set                                      |
+
+---
+
+### 🔍 So Basically...
+
+- **Lists** are flexible and ordered — use them for dynamic collections.
+- **Tuples** are fixed and lightweight — great for immutable records.
+- **Dictionaries** are key-value stores — ideal for fast lookups.
+- **Sets** are unique and unordered — perfect for membership and math-like operations.
+
+Want me to turn this into a printable PDF or interactive quiz next?
