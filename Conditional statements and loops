@@ -1,0 +1,96 @@
+If condition:
+    block of code 
+elif condition:
+    code 
+else:
+    code
+Note: No code is allowed in between if conditional block and else statement. 
+
+Nested CONDITION
+The conditional block inside another if/else conditional block is called as nested conditional block.
+In the below example, Block 2 is nested conditional block and condition B is called nested conditional statement.
+if condition:
+    if condition:
+        b o c
+    else:
+        boc
+else:
+    boc
+
+LOOPS:
+Loops
+So far we have seen that Python executes code in a sequence and each block of code is executed once.
+Loops allow us to execute a block of code several times.
+While Loop
+Allows us to execute a block of code several times as long as the condition is True. 
+example 
+initilazation
+while tremination condition:
+      code
+      updation
+a = int(input())  
+counter = 0  
+while counter < 3:  
+    a = a + 1  
+    print(a)  
+    counter = counter + 1
+
+For Loop
+for statement iterates over each item of a sequence. 
+Examples of sequences:
+
+Sequence of Characters (string)
+Sequence of numbers, etc.
+for i in range(1,10):
+    boc 
+ex:word = "Python"  
+for each_char in word:  
+    print(each_char)
+Generates a sequence of integers starting from 0.
+Syntax: range(n)
+Stops before n (n is not included).
+Generates a sequence of numbers starting from start
+Syntax: range(start, end)
+Stops before end (end is not included). 
+
+NEESTED LOOP
+Nested Loops
+An inner loop within the repeating block of an outer loop is called Nested Loop.
+The Inner Loop will be executed one time for each iteration of the Outer Loop.
+for i in seq: 
+   b o c  outer loop
+   for j in sec :
+      boc inner loop
+   boc
+boc
+
+example for i in range(2):
+  print("Outer: " + str(i))
+  for j in range(2):
+    print(" Inner: " + str(j))
+
+LOOP CONTROL STATEMENT:
+break:Break statement makes the program exit a loop early.
+for i in range(5):
+  if i == 3:
+    break
+  print(i)
+print("END") 
+In the below example, when the variable i value equals to 3 the break statement gets executed and stops the execution of the loop further.
+Break in Nested Loop
+Break in inner loop stops the execution of the inner loop.
+
+Continue:
+Continue makes the program skip the remaining statements in the current iteration and begin the next iteration.
+Generally, continue is used to skip the remaining statements in the current iteration when a condition is satisfied.
+In the below example, when the variable i value equals to 3 the next statements in the loop body are skipped.
+for i in range(5):
+  if i == 3:
+    continue
+  print(i)
+print("END")
+
+PASS:
+pass statement is used as a syntactic placeholder. When it is executed, nothing happens.
+Generally used when we have to test the code before writing the complete code.
+For empty loops We can use pass statements to test code written so far, before writing loop logic.
