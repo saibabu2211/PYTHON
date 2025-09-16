@@ -6,7 +6,102 @@ Multidimensional arrays (ndarray) that are faster and more memory-efficient than
 Mathematical functions to operate on arrays without writing loops.
 
 Linear algebra, statistics, and random number generation tools.
+Absolutely, Saibabu! Here's a comprehensive breakdown of **NumPy**—from basic to advanced—organized in a clean tabular format with examples for each function category. This will help you master NumPy for real-world Python applications, especially in analytics and automation.
 
+---
+
+## 🧠 What is NumPy?
+NumPy (Numerical Python) is a core library for numerical computing in Python. It provides:
+- Efficient **ndarray** objects (multi-dimensional arrays)
+- Fast **mathematical operations**
+- Tools for **linear algebra**, **statistics**, **random sampling**, and more
+
+---
+
+## 📘 NumPy Function Categories (With Examples)
+
+| **Category**                  | **Function**                  | **Description**                                                                 | **Example**                                                                 |
+|------------------------------|-------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Array Creation**           | `np.array()`                  | Create array from list/tuple                                                    | `np.array([1, 2, 3])`                                                       |
+|                              | `np.zeros()`                  | Create array of zeros                                                           | `np.zeros((2, 3))`                                                          |
+|                              | `np.ones()`                   | Create array of ones                                                            | `np.ones((3, 2))`                                                           |
+|                              | `np.arange()`                 | Create range of values                                                          | `np.arange(0, 10, 2)`                                                       |
+|                              | `np.linspace()`               | Create evenly spaced values                                                     | `np.linspace(0, 1, 5)`                                                      |
+|                              | `np.eye()`                    | Identity matrix                                                                 | `np.eye(3)`                                                                 |
+| **Array Inspection**         | `.shape`                      | Get array dimensions                                                            | `a.shape`                                                                   |
+|                              | `.ndim`                       | Number of dimensions                                                            | `a.ndim`                                                                    |
+|                              | `.size`                       | Total number of elements                                                        | `a.size`                                                                    |
+|                              | `.dtype`                      | Data type of elements                                                           | `a.dtype`                                                                   |
+| **Array Manipulation**       | `np.reshape()`                | Change shape of array                                                           | `a.reshape((2, 3))`                                                         |
+|                              | `np.transpose()`              | Transpose array                                                                 | `np.transpose(a)`                                                           |
+|                              | `np.concatenate()`            | Join arrays                                                                     | `np.concatenate([a, b])`                                                   |
+|                              | `np.split()`                  | Split array                                                                     | `np.split(a, 2)`                                                            |
+|                              | `np.resize()`                 | Resize array (can pad/truncate)                                                 | `a.resize((2, 4))`                                                          |
+| **Indexing & Slicing**       | `a[1:3]`                      | Slice array                                                                     | `a[1:3]`                                                                    |
+|                              | `a[::2]`                      | Step slicing                                                                    | `a[::2]`                                                                    |
+|                              | `a[[0, 2]]`                   | Fancy indexing                                                                  | `a[[0, 2]]`                                                                 |
+|                              | `a[a > 5]`                    | Boolean indexing                                                                | `a[a > 5]`                                                                  |
+| **Mathematical Operations**  | `np.add()`                    | Element-wise addition                                                           | `np.add(a, b)`                                                              |
+|                              | `np.subtract()`               | Element-wise subtraction                                                        | `np.subtract(a, b)`                                                         |
+|                              | `np.multiply()`               | Element-wise multiplication                                                     | `np.multiply(a, b)`                                                         |
+|                              | `np.divide()`                 | Element-wise division                                                           | `np.divide(a, b)`                                                           |
+|                              | `np.power()`                  | Element-wise exponentiation                                                     | `np.power(a, 2)`                                                            |
+|                              | `np.sqrt()`                   | Square root                                                                     | `np.sqrt(a)`                                                                |
+|                              | `np.exp()`                    | Exponential                                                                     | `np.exp(a)`                                                                 |
+|                              | `np.log()`                    | Natural log                                                                     | `np.log(a)`                                                                 |
+| **Aggregate Functions**      | `np.sum()`                    | Sum of all elements                                                             | `np.sum(a)`                                                                 |
+|                              | `np.mean()`                   | Mean value                                                                      | `np.mean(a)`                                                                |
+|                              | `np.median()`                 | Median value                                                                    | `np.median(a)`                                                              |
+|                              | `np.std()`                    | Standard deviation                                                              | `np.std(a)`                                                                 |
+|                              | `np.var()`                    | Variance                                                                        | `np.var(a)`                                                                 |
+| **Random Functions**         | `np.random.rand()`            | Random floats in [0, 1)                                                         | `np.random.rand(2, 3)`                                                      |
+|                              | `np.random.randint()`         | Random integers                                                                 | `np.random.randint(0, 10, size=(2, 2))`                                     |
+|                              | `np.random.normal()`          | Normal distribution                                                             | `np.random.normal(loc=0, scale=1, size=3)`                                  |
+|                              | `np.random.seed()`            | Set seed for reproducibility                                                    | `np.random.seed(42)`                                                        |
+| **Linear Algebra**           | `np.dot()`                    | Dot product                                                                     | `np.dot(a, b)`                                                              |
+|                              | `np.linalg.inv()`             | Matrix inverse                                                                  | `np.linalg.inv(a)`                                                          |
+|                              | `np.linalg.eig()`             | Eigenvalues and eigenvectors                                                    | `np.linalg.eig(a)`                                                          |
+|                              | `np.linalg.det()`             | Determinant                                                                     | `np.linalg.det(a)`                                                          |
+| **File I/O**                 | `np.save()`                   | Save array to `.npy` file                                                       | `np.save('data.npy', a)`                                                    |
+|                              | `np.load()`                   | Load array from `.npy` file                                                     | `np.load('data.npy')`                                                       |
+|                              | `np.loadtxt()`                | Load from text file                                                             | `np.loadtxt('data.txt')`                                                    |
+|                              | `np.savetxt()`                | Save to text file                                                               | `np.savetxt('data.txt', a)`                                                 |
+
+Sources: [GeeksforGeeks NumPy Cheat Sheet](https://www.geeksforgeeks.org/python/numpy-cheat-sheet/), [AlmaBetter NumPy Guide](https://www.almabetter.com/bytes/cheat-sheet/numpy), [Programiz NumPy Functions](https://www.programiz.com/python-programming/numpy/array-functions)
+
+---
+
+## 🧪 Real-World Use Case: Analytics Automation
+
+```python
+import numpy as np
+
+# Simulate sales data
+sales = np.array([1200, 1500, 1700, 1600, 1800])
+
+# Basic stats
+print("Total Sales:", np.sum(sales))
+print("Average Sales:", np.mean(sales))
+print("Sales Std Dev:", np.std(sales))
+
+# Normalize for dashboard
+normalized = (sales - np.mean(sales)) / np.std(sales)
+print("Normalized Sales:", normalized)
+```
+
+---
+
+## 🧩 TL;DR: Mastering NumPy
+
+- Start with **array creation** and **basic math**
+- Use **manipulation** and **indexing** for data wrangling
+- Apply **aggregate** and **random functions** for analytics
+- Explore **linear algebra** for advanced modeling
+- Use **file I/O** for saving/loading data efficiently
+
+---
+
+Want me to turn this into a reusable Python module or dashboard-ready script? I’d be happy to help!
 Seamless integration with other libraries like Pandas, Matplotlib, and SciPy.
 
 ## 🧱 1. Array Creation
