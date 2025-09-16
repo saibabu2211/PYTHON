@@ -12,3 +12,91 @@ Reshaping and Pivoting: Transforming the layout of data.
 Grouping and Aggregation: Performing "split-apply-combine" operations on data, such as calculating sums, averages, or counts within groups.
 Time Series Functionality: Specialized tools for working with time-series data, including date range generation, frequency conversion, and moving window statistics.
 Performance: Critical code paths are optimized for performance, often implemented in C or Cython.
+Absolutely, Saibabu! Here's a complete, structured breakdown of **Pandas**—from basic to advanced—organized in a tabular format with examples. This will help you master data manipulation, analysis, and automation in real-world Python projects.
+
+---
+
+## 🧠 What is Pandas?
+Pandas is a powerful Python library for **data manipulation**, **analysis**, and **cleaning**. It provides:
+- Two core data structures: `Series` (1D) and `DataFrame` (2D)
+- Tools for reading/writing files, filtering, grouping, merging, and reshaping data
+
+---
+
+## 📘 Pandas Function Categories (With Examples)
+
+| **Category**                | **Function / Method**         | **Description**                                                                 | **Example**                                                                 |
+|----------------------------|-------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Data Structures**        | `pd.Series()`                 | Create 1D labeled array                                                         | `pd.Series([10, 20, 30])`                                                   |
+|                            | `pd.DataFrame()`              | Create 2D labeled table                                                         | `pd.DataFrame({'A': [1, 2], 'B': [3, 4]})`                                   |
+| **Data Inspection**        | `.head()`                     | First n rows                                                                    | `df.head(5)`                                                                |
+|                            | `.tail()`                     | Last n rows                                                                     | `df.tail(3)`                                                                |
+|                            | `.shape`                      | Rows and columns count                                                          | `df.shape`                                                                  |
+|                            | `.info()`                     | Summary of DataFrame                                                            | `df.info()`                                                                 |
+|                            | `.describe()`                 | Stats summary                                                                   | `df.describe()`                                                             |
+|                            | `.columns`                    | Column names                                                                    | `df.columns`                                                                |
+|                            | `.dtypes`                     | Data types of columns                                                           | `df.dtypes`                                                                 |
+| **Data Selection**         | `df['col']`                   | Select column                                                                   | `df['A']`                                                                   |
+|                            | `df.loc[]`                    | Label-based selection                                                           | `df.loc[0, 'A']`                                                            |
+|                            | `df.iloc[]`                   | Position-based selection                                                        | `df.iloc[0, 1]`                                                             |
+|                            | `df.at[]`                     | Fast scalar access by label                                                     | `df.at[0, 'A']`                                                             |
+|                            | `df.iat[]`                    | Fast scalar access by position                                                  | `df.iat[0, 1]`                                                              |
+| **Filtering & Conditions** | `df[df['A'] > 10]`            | Filter rows by condition                                                        | `df[df['A'] > 10]`                                                          |
+|                            | `.isin()`                     | Check membership                                                                | `df[df['A'].isin([10, 20])]`                                                |
+|                            | `.between()`                  | Range filtering                                                                 | `df[df['A'].between(10, 20)]`                                               |
+| **Missing Data**           | `.isnull()`                   | Detect missing values                                                           | `df.isnull()`                                                               |
+|                            | `.notnull()`                  | Detect non-missing values                                                       | `df.notnull()`                                                              |
+|                            | `.fillna()`                   | Fill missing values                                                             | `df.fillna(0)`                                                              |
+|                            | `.dropna()`                   | Drop missing rows                                                               | `df.dropna()`                                                               |
+| **Data Transformation**    | `.apply()`                    | Apply function to rows/columns                                                  | `df['A'].apply(np.sqrt)`                                                   |
+|                            | `.map()`                      | Map values (Series only)                                                        | `df['A'].map({1: 'One', 2: 'Two'})`                                         |
+|                            | `.replace()`                  | Replace values                                                                  | `df.replace({1: 100})`                                                      |
+|                            | `.rename()`                   | Rename columns                                                                  | `df.rename(columns={'A': 'Alpha'})`                                         |
+|                            | `.astype()`                   | Change data type                                                                | `df['A'].astype(float)`                                                     |
+| **Sorting & Ranking**      | `.sort_values()`              | Sort by column                                                                  | `df.sort_values('A')`                                                       |
+|                            | `.sort_index()`               | Sort by index                                                                   | `df.sort_index()`                                                           |
+|                            | `.rank()`                     | Rank values                                                                     | `df['A'].rank()`                                                            |
+| **Aggregation & Grouping** | `.groupby()`                  | Group data                                                                      | `df.groupby('Category').sum()`                                              |
+|                            | `.agg()`                      | Multiple aggregations                                                           | `df.agg({'A': 'sum', 'B': 'mean'})`                                         |
+|                            | `.pivot_table()`              | Create pivot table                                                              | `df.pivot_table(values='A', index='B', aggfunc='sum')`                      |
+| **Merging & Joining**      | `pd.merge()`                  | Merge DataFrames                                                                | `pd.merge(df1, df2, on='ID')`                                               |
+|                            | `df.join()`                   | Join on index                                                                   | `df1.join(df2)`                                                             |
+|                            | `pd.concat()`                 | Concatenate DataFrames                                                          | `pd.concat([df1, df2])`                                                     |
+| **Reshaping**              | `.melt()`                     | Unpivot DataFrame                                                               | `pd.melt(df, id_vars=['ID'])`                                               |
+|                            | `.stack()`                    | Stack columns into index                                                        | `df.stack()`                                                                |
+|                            | `.unstack()`                  | Unstack index into columns                                                      | `df.unstack()`                                                              |
+|                            | `.transpose()`                | Transpose rows and columns                                                      | `df.T`                                                                      |
+| **Datetime Handling**      | `pd.to_datetime()`            | Convert to datetime                                                             | `pd.to_datetime(df['date'])`                                                |
+|                            | `.dt.year`, `.dt.month`       | Extract year/month                                                              | `df['date'].dt.year`                                                        |
+|                            | `.resample()`                 | Resample time series                                                            | `df.resample('M').sum()`                                                    |
+| **File I/O**               | `pd.read_csv()`               | Read CSV file                                                                   | `pd.read_csv('data.csv')`                                                   |
+|                            | `pd.to_csv()`                 | Write to CSV                                                                    | `df.to_csv('output.csv')`                                                   |
+|                            | `pd.read_excel()`             | Read Excel file                                                                 | `pd.read_excel('data.xlsx')`                                                |
+|                            | `pd.to_excel()`               | Write to Excel                                                                  | `df.to_excel('output.xlsx')`                                                |
+
+Sources: [Pandas Official Docs](https://pandas.pydata.org/docs/), [GeeksforGeeks Pandas Guide](https://www.geeksforgeeks.org/python-pandas-complete-guide/), [AlmaBetter Pandas Cheat Sheet](https://www.almabetter.com/bytes/cheat-sheet/pandas)
+
+---
+
+## 🧪 Real-World Use Case: Sales Data Analysis
+
+```python
+import pandas as pd
+
+# Load sales data
+df = pd.read_csv('sales.csv')
+
+# Clean missing values
+df.fillna(0, inplace=True)
+
+# Monthly summary
+monthly = df.groupby('Month')['Revenue'].sum()
+
+# Top 5 products
+top_products = df.groupby('Product')['Revenue'].sum().sort_values(ascending=False).head(5)
+
+print("Monthly Revenue:\n", monthly)
+print("Top Products:\n", top_products)
+```
+
+---
