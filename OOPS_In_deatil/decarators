@@ -1,7 +1,112 @@
-Let’s break down **decorators** in Python, Saibabu — with clear explanations, practical examples, and how they’re used in real-world applications like logging, access control, and class design.
+Great — let’s break down **how decorators actually work under the hood** in Python, Saibabu. I’ll show you step-by-step how a decorator wraps a function, what gets passed, and how execution flows. This will give you a deep understanding of the mechanism — not just the syntax.
 
 ---
 
+## 🧠 Decorator = Function that Returns a Function
+
+Here’s the core idea:
+
+```python
+def decorator(func):        # func is the original function
+    def wrapper():          # wrapper adds extra behavior
+        print("Before")
+        func()              # call the original function
+        print("After")
+    return wrapper          # return the wrapped version
+```
+
+When you use `@decorator`, Python does this:
+
+```python
+@decorator
+def greet():
+    print("Hello!")
+
+# is equivalent to:
+greet = decorator(greet)
+```
+
+So now `greet()` actually calls `wrapper()`, not the original `greet()` directly.
+
+---
+
+## 🔍 Step-by-Step Execution Flow
+
+Let’s trace what happens when you run `greet()`:
+
+1. Python sees `@decorator` above `greet`.
+2. It calls `decorator(greet)` and gets back `wrapper`.
+3. It replaces `greet` with `wrapper`.
+4. When you call `greet()`, it runs `wrapper()`:
+   - Prints `"Before"`
+   - Calls the original `greet()` inside `wrapper`
+   - Prints `"After"`
+
+---
+
+## 🧪 Example with Arguments
+
+```python
+def log(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__} with {args}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@log
+def add(x, y):
+    return x + y
+
+result = add(10, 5)
+print(result)
+```
+
+### 🔄 What Happens:
+- `add = log(add)`
+- `add(10, 5)` → calls `wrapper(10, 5)`
+- Inside `wrapper`:
+  - Logs the call
+  - Calls `func(10, 5)` → which is the original `add`
+  - Returns the result
+
+---
+
+## 🧩 Decorators with Parameters
+
+```python
+def repeat(n):
+    def decorator(func):
+        def wrapper():
+            for _ in range(n):
+                func()
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet():
+    print("Hello!")
+```
+
+### 🔄 Flow:
+- `repeat(3)` returns `decorator`
+- `greet = decorator(greet)` returns `wrapper`
+- `greet()` calls `wrapper()` → runs `func()` 3 times
+
+---
+
+## 🧠 Summary
+
+| Component   | Role                                      |
+|-------------|-------------------------------------------|
+| `func`      | Original function being decorated         |
+| `wrapper`   | New function that wraps `func`            |
+| `@decorator`| Shortcut for `func = decorator(func)`     |
+| `*args`     | Allows passing any number of arguments    |
+| `return wrapper` | Replaces original function with new behavior |
+
+---
+
+Would you like me to show how decorators work with classes — like logging method calls or enforcing access control? I can also help you build a reusable decorator for your analytics or reporting modules.
 ## 🧩 What Is a Decorator?
 
 A **decorator** is a **function that modifies another function or method** — without changing its actual code. It’s a clean way to add extra behavior like logging, timing, validation, or access control.
