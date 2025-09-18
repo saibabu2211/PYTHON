@@ -161,4 +161,143 @@ def load_config(path):
 
 config = load_config('settings.json')
 print(f"App version: {config['version']}")
-``
+
+Great choice, Saibabu! CSV files are everywhere in the real world — from sales reports to user data exports. Let’s break down **working with CSV files in Python** from beginner to advanced, with practical examples and modular clarity.
+
+---
+
+## 📊 Python CSV Handling: From Basics to Real-World
+
+### 🔹 1. What Is a CSV File?
+**CSV (Comma-Separated Values)** is a plain text format where each line is a data record, and each field is separated by a comma.
+
+Example:
+```
+Name,Score,Grade
+Saibabu,95,A
+Alex,88,B
+```
+
+---
+
+### 🔹 2. Reading CSV Files
+
+#### ✅ Basic Read
+```python
+import csv
+
+with open('students.csv', 'r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+```
+
+#### ✅ Read with Headers (DictReader)
+```python
+import csv
+
+with open('students.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(f"{row['Name']} scored {row['Score']}")
+```
+
+---
+
+### 🔹 3. Writing to CSV Files
+
+#### ✅ Basic Write
+```python
+import csv
+
+data = [['Name', 'Score'], ['Saibabu', 95], ['Alex', 88]]
+with open('results.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+```
+
+#### ✅ Write with Headers (DictWriter)
+```python
+import csv
+
+data = [{'Name': 'Saibabu', 'Score': 95}, {'Name': 'Alex', 'Score': 88}]
+with open('results.csv', 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['Name', 'Score'])
+    writer.writeheader()
+    writer.writerows(data)
+```
+
+---
+
+### 🔹 4. Real-Time Use Case: Sales Report Analyzer
+
+```python
+import csv
+
+def total_sales(file_path):
+    total = 0
+    with open(file_path, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            total += float(row['Amount'])
+    return total
+
+print("💰 Total Sales:", total_sales('sales.csv'))
+```
+
+---
+
+### 🔹 5. Filtering Rows
+
+```python
+def high_scores(file_path, threshold):
+    with open(file_path, 'r') as f:
+        reader = csv.DictReader(f)
+        return [row for row in reader if int(row['Score']) > threshold]
+
+for student in high_scores('students.csv', 90):
+    print(student)
+```
+
+---
+
+### 🔹 6. Updating CSV (Read → Modify → Write)
+
+```python
+def update_grades(file_path):
+    updated = []
+    with open(file_path, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row['Grade'] = 'A' if int(row['Score']) >= 90 else 'B'
+            updated.append(row)
+
+    with open(file_path, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['Name', 'Score', 'Grade'])
+        writer.writeheader()
+        writer.writerows(updated)
+
+update_grades('students.csv')
+```
+
+---
+
+### 🔹 7. Advanced Tips
+
+| Feature           | Use Case                            |
+|-------------------|-------------------------------------|
+| `newline=''`      | Prevents blank lines on Windows     |
+| `quotechar='"'`   | Wraps fields with quotes            |
+| `delimiter=';'`   | For semicolon-separated files       |
+| `encoding='utf-8'`| Handles special characters          |
+
+---
+
+### 🔹 8. Mini Project Idea: Attendance Tracker
+
+- Input: `attendance.csv` with `Name`, `Date`, `Status`
+- Output: Summary of present/absent counts per student
+- Bonus: Export summary to `summary.csv`
+
+Want me to build this mini project with you next? Or turn this CSV guide into a Copilot Page so you can edit and expand it?
+
