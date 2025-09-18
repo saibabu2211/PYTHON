@@ -1,1 +1,135 @@
+from abc import ABC, abstractmethod
+
+# -----------------------------
+# Product Class
+# -----------------------------
+class Product:
+    def __init__(self, name, price, stock):
+        self.name = name
+        self._price = price
+        self.stock = stock
+
+    @property
+    def price_with_tax(self):
+        return round(self._price * 1.18, 2)
+
+    def update_stock(self, quantity):
+        if quantity <= self.stock:
+            self.stock -= quantity
+        else:
+            raise ValueError("Insufficient stock")
+
+    def __str__(self):
+        return f"{self.name} - ₹{self.price_with_tax} (Stock: {self.stock})"
+
+# -----------------------------
+# User Base Class
+# -----------------------------
+class User:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"User: {self.name}"
+
+# -----------------------------
+# Buyer and Seller (Inheritance)
+# -----------------------------
+class Buyer(User):
+    def __init__(self, name):
+        super().__init__(name)
+        self.cart = Cart()
+
+    def add_to_cart(self, product, quantity):
+        self.cart.add_item(product, quantity)
+
+class Seller(User):
+    def __init__(self, name):
+        super().__init__(name)
+        self.products = []
+
+    def list_product(self, product):
+        self.products.append(product)
+        print(f"{self.name} listed {product.name}")
+
+# -----------------------------
+# Cart Class
+# -----------------------------
+class Cart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, product, quantity):
+        self.items.append((product, quantity))
+
+    def __len__(self):
+        return len(self.items)
+
+    def __str__(self):
+        return "\n".join([f"{p.name} x {q}" for p, q in self.items])
+
+# -----------------------------
+# Order Class
+# -----------------------------
+class Order:
+    def __init__(self, buyer, cart):
+        self.buyer = buyer
+        self.cart = cart
+        self.status = "Pending"
+
+    def calculate_total(self):
+        return sum(p.price_with_tax * q for p, q in self.cart.items)
+
+    def confirm(self):
+        for product, quantity in self.cart.items:
+            product.update_stock(quantity)
+        self.status = "Confirmed"
+
+    def __str__(self):
+        return f"Order for {self.buyer.name} - ₹{self.calculate_total()} - {self.status}"
+
+# -----------------------------
+# Abstract Payment Gateway
+# -----------------------------
+class PaymentGateway(ABC):
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+# -----------------------------
+# Concrete Payment Methods
+# -----------------------------
+class PayPal(PaymentGateway):
+    def pay(self, amount):
+        print(f"Paid ₹{amount} via PayPal")
+
+class CreditCard(PaymentGateway):
+    def pay(self, amount):
+        print(f"Paid ₹{amount} via Credit Card")
+
+# -----------------------------
+# Demo Execution
+# -----------------------------
+if __name__ == "__main__":
+    # Seller lists products
+    seller = Seller("Saibabu")
+    p1 = Product("Laptop", 50000, 10)
+    p2 = Product("Mouse", 500, 50)
+    seller.list_product(p1)
+    seller.list_product(p2)
+
+    # Buyer adds items to cart
+    buyer = Buyer("Ravi")
+    buyer.add_to_cart(p1, 1)
+    buyer.add_to_cart(p2, 2)
+
+    # Create and confirm order
+    order = Order(buyer, buyer.cart)
+    print(order)
+    order.confirm()
+    print(order)
+
+    # Process payment
+    payment = PayPal()
+    payment.pay(order.calculate_total())
 
