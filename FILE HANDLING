@@ -1,0 +1,164 @@
+## 📁 Python File Handling: Complete Guide
+
+### 🔹 1. What Is File Handling?
+File handling allows you to **create**, **read**, **write**, **append**, and **delete** files using Python. It’s essential for:
+- Logging user activity
+- Reading configuration files
+- Writing reports or results
+- Processing data files (CSV, JSON, etc.)
+
+---
+
+### 🔹 2. File Modes
+
+| Mode | Description                          |
+|------|--------------------------------------|
+| `'r'` | Read (default). Error if file not found |
+| `'w'` | Write. Overwrites existing file       |
+| `'a'` | Append. Adds to end of file           |
+| `'x'` | Create. Error if file exists          |
+| `'b'` | Binary mode (e.g., `'rb'`, `'wb'`)    |
+| `'+'` | Read and write (e.g., `'r+'`, `'w+'`) |
+
+---
+
+### 🔹 3. Basic Operations
+
+#### ✅ Open and Read
+```python
+with open('report.txt', 'r') as f:
+    content = f.read()
+    print(content)
+```
+
+#### ✅ Write to a File
+```python
+with open('log.txt', 'w') as f:
+    f.write("Session started\n")
+```
+
+#### ✅ Append to a File
+```python
+with open('log.txt', 'a') as f:
+    f.write("User logged in\n")
+```
+
+#### ✅ Read Line-by-Line
+```python
+with open('data.txt') as f:
+    for line in f:
+        print(line.strip())
+```
+
+---
+
+### 🔹 4. Real-Time Use Case: Logging User Actions
+
+```python
+def log_action(user, action):
+    with open('user_log.txt', 'a') as f:
+        f.write(f"{user} performed {action}\n")
+
+log_action("Saibabu", "Submitted report")
+```
+
+---
+
+### 🔹 5. File Existence Check
+
+```python
+import os
+
+if os.path.exists('data.txt'):
+    print("File exists")
+else:
+    print("File not found")
+```
+
+---
+
+### 🔹 6. Working with CSV Files
+
+#### ✅ Read CSV
+```python
+import csv
+
+with open('sales.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row['Amount'])
+```
+
+#### ✅ Write CSV
+```python
+import csv
+
+data = [{'Name': 'Saibabu', 'Score': 95}, {'Name': 'Alex', 'Score': 88}]
+with open('results.csv', 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['Name', 'Score'])
+    writer.writeheader()
+    writer.writerows(data)
+```
+
+---
+
+### 🔹 7. Working with JSON Files
+
+#### ✅ Read JSON
+```python
+import json
+
+with open('config.json') as f:
+    config = json.load(f)
+    print(config['version'])
+```
+
+#### ✅ Write JSON
+```python
+import json
+
+settings = {'theme': 'dark', 'version': '1.2'}
+with open('config.json', 'w') as f:
+    json.dump(settings, f, indent=4)
+```
+
+---
+
+### 🔹 8. Exception Handling in File Operations
+
+```python
+try:
+    with open('missing.txt', 'r') as f:
+        data = f.read()
+except FileNotFoundError:
+    print("File not found. Please check the path.")
+```
+
+---
+
+### 🔹 9. Advanced: File Pointer Control
+
+```python
+with open('data.txt', 'r') as f:
+    print(f.read(10))      # Read first 10 characters
+    f.seek(0)              # Move pointer to start
+    print(f.readline())    # Read one line
+```
+
+---
+
+### 🔹 10. Real-World Mini Project: Config Loader
+
+```python
+import json
+import os
+
+def load_config(path):
+    if not os.path.exists(path):
+        raise FileNotFoundError("Config file missing")
+    with open(path) as f:
+        return json.load(f)
+
+config = load_config('settings.json')
+print(f"App version: {config['version']}")
+``
