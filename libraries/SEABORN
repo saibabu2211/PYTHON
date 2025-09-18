@@ -166,9 +166,104 @@ Absolutely, Saibabu! Here's a complete, structured roadmap of **Seaborn topics f
 - Prefer `sns.scatterplot()` over `plt.scatter()` for grouped data
 - Use `pairplot()` and `heatmap()` for quick EDA
 - Combine Seaborn with Matplotlib for fine-tuned control
+Here you go, Saibabu — a curated set of **Seaborn examples** from basic to advanced, structured for real-world analytics and modular Python use. Each example is manager-ready and integrates cleanly with Pandas workflows.
 
 ---
 
-Would you like this roadmap as a reusable cheat sheet or a workplace-ready dashboard template using Seaborn + Pandas + Matplotlib? I can build it modular for manager review.
+## 🔰 1. Basic Line Plot
 
-Would you like a reusable cheat sheet comparing Seaborn and Matplotlib functions side-by-side for common plot types? Perfect for workplace submissions.
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = sns.load_dataset("flights")
+sns.lineplot(data=df, x="year", y="passengers", estimator="sum")
+plt.title("Total Passengers per Year")
+plt.show()
+```
+
+---
+
+## 📊 2. Categorical Bar Plot
+
+```python
+df = sns.load_dataset("titanic")
+sns.barplot(x="class", y="fare", data=df, estimator=sum, ci=None)
+plt.title("Total Fare by Class")
+plt.show()
+```
+
+---
+
+## 📈 3. Scatter Plot with Hue & Style
+
+```python
+df = sns.load_dataset("iris")
+sns.scatterplot(data=df, x="sepal_length", y="sepal_width", hue="species", style="species")
+plt.title("Sepal Dimensions by Species")
+plt.show()
+```
+
+---
+
+## 📦 4. Box Plot for Distribution
+
+```python
+sns.boxplot(data=df, x="species", y="petal_length")
+plt.title("Petal Length Distribution")
+plt.show()
+```
+
+---
+
+## 🔥 5. Heatmap for Correlation
+
+```python
+corr = df.corr(numeric_only=True)
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.title("Feature Correlation")
+plt.show()
+```
+
+---
+
+## 🧪 6. Pairplot for EDA
+
+```python
+sns.pairplot(df, hue="species", diag_kind="kde")
+```
+
+---
+
+## 🧬 7. FacetGrid for Multi-Panel Views
+
+```python
+g = sns.FacetGrid(df, col="species")
+g.map(sns.histplot, "sepal_length")
+```
+
+---
+
+## 📉 8. Regression Plot
+
+```python
+sns.lmplot(data=df, x="sepal_length", y="petal_length", hue="species")
+```
+
+---
+
+## 🧭 9. Jointplot for Bivariate Analysis
+
+```python
+sns.jointplot(data=df, x="sepal_length", y="petal_length", kind="hex", hue="species")
+```
+
+---
+
+## 🧰 10. Save Your Plot
+
+```python
+plt.savefig("iris_scatter.png", dpi=300, bbox_inches="tight")
+```
+
+---
