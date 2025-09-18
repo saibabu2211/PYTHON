@@ -1,1 +1,130 @@
+Let’s break down **decorators** in Python, Saibabu — with clear explanations, practical examples, and how they’re used in real-world applications like logging, access control, and class design.
 
+---
+
+## 🧩 What Is a Decorator?
+
+A **decorator** is a **function that modifies another function or method** — without changing its actual code. It’s a clean way to add extra behavior like logging, timing, validation, or access control.
+
+Think of it like wrapping a gift: the core stays the same, but the wrapper adds something useful.
+
+---
+
+## 🧠 Syntax of a Decorator
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Before function runs")
+        func()
+        print("After function runs")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+```
+
+**Output:**
+```
+Before function runs
+Hello!
+After function runs
+```
+
+---
+
+## 🧰 Built-in Decorators in Python
+
+### 🔹 `@staticmethod`
+Used inside classes to define a method that doesn’t need access to `self` or `cls`.
+
+```python
+class Math:
+    @staticmethod
+    def add(x, y):
+        return x + y
+```
+
+### 🔹 `@classmethod`
+Used to define a method that works with the class (`cls`) instead of an instance.
+
+```python
+class Product:
+    count = 0
+
+    @classmethod
+    def increment(cls):
+        cls.count += 1
+```
+
+### 🔹 `@property`
+Used to turn a method into a **read-only attribute**.
+
+```python
+class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+
+    @property
+    def fahrenheit(self):
+        return (self._celsius * 9/5) + 32
+```
+
+---
+
+## 🧪 Real-World Use Cases
+
+### ✅ Logging
+```python
+def log(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@log
+def process_data():
+    print("Processing...")
+```
+
+### ✅ Access Control
+```python
+def admin_only(func):
+    def wrapper(user):
+        if user != "admin":
+            print("Access denied")
+        else:
+            return func(user)
+    return wrapper
+
+@admin_only
+def delete_record(user):
+    print(f"{user} deleted the record")
+```
+
+---
+
+## 🧠 Decorators with Arguments
+
+You can even create decorators that accept arguments:
+
+```python
+def repeat(n):
+    def decorator(func):
+        def wrapper():
+            for _ in range(n):
+                func()
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet():
+    print("Hello!")
+```
+
+---
+
+Would you like a cheat sheet of decorators for workplace automation — like logging, retry logic, or timing functions? I can also help you build reusable decorators for your manager-ready Python modules.
