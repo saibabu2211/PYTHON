@@ -1,0 +1,67 @@
+from abc import ABC, abstractmethod
+
+# -------------------------------
+# 1. Abstraction (via ABC class)
+# -------------------------------
+class Vehicle(ABC):
+    def __init__(self, brand, model):
+        self._brand = brand         # Encapsulated attribute
+        self._model = model         # Encapsulated attribute
+
+    @abstractmethod
+    def start_engine(self):
+        pass
+
+    @abstractmethod
+    def stop_engine(self):
+        pass
+
+    def get_info(self):
+        return f"{self._brand} {self._model}"
+
+# -------------------------------
+# 2. Inheritance
+# -------------------------------
+class Car(Vehicle):
+    def __init__(self, brand, model, fuel_type):
+        super().__init__(brand, model)
+        self.__fuel_type = fuel_type  # Private attribute (Encapsulation)
+
+    def start_engine(self):
+        print(f"{self.get_info()} engine started with {self.__fuel_type}")
+
+    def stop_engine(self):
+        print(f"{self.get_info()} engine stopped")
+
+    def get_fuel_type(self):
+        return self.__fuel_type
+
+class ElectricCar(Car):
+    def __init__(self, brand, model, battery_capacity):
+        super().__init__(brand, model, fuel_type="Electric")
+        self.battery_capacity = battery_capacity
+
+    def start_engine(self):
+        print(f"{self.get_info()} silently powers on with {self.battery_capacity} kWh battery")
+
+# -------------------------------
+# 3. Polymorphism
+# -------------------------------
+def operate_vehicle(vehicle: Vehicle):
+    vehicle.start_engine()
+    vehicle.stop_engine()
+
+# -------------------------------
+# 4. Demo Execution
+# -------------------------------
+if __name__ == "__main__":
+    car1 = Car("Toyota", "Camry", "Petrol")
+    car2 = ElectricCar("Tesla", "Model 3", 75)
+
+    # Encapsulation: accessing protected/private data via methods
+    print(car1.get_info())           # Toyota Camry
+    print(car1.get_fuel_type())      # Petrol
+
+    # Polymorphism: same function works for different vehicle types
+    operate_vehicle(car1)
+    operate_vehicle(car2)
