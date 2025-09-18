@@ -1,0 +1,147 @@
+ Python Errors & Exceptions: Complete Guide
+
+### 🔹 1. What Are Errors and Exceptions?
+
+| Term        | Meaning                                                                 |
+|-------------|-------------------------------------------------------------------------|
+| **Error**   | Unexpected issue that breaks the program (e.g., syntax error)           |
+| **Exception** | Runtime error that can be caught and handled (e.g., file not found)     |
+
+---
+
+### 🔹 2. Types of Errors
+
+#### ✅ Syntax Errors
+- Mistakes in code structure — Python can't even run it.
+```python
+if x > 5  # ❌ Missing colon
+    print("Too big")
+```
+
+#### ✅ Runtime Errors (Exceptions)
+- Occur **while** the program is running.
+```python
+print(10 / 0)  # ❌ ZeroDivisionError
+```
+
+#### ✅ Logical Errors
+- Code runs but gives wrong output — hardest to detect.
+```python
+def is_even(n):
+    return n % 2 == 1  # ❌ Wrong logic
+```
+
+---
+
+### 🔹 3. Built-in Exception Types
+
+| Exception            | Trigger Example                    |
+|----------------------|-------------------------------------|
+| `ZeroDivisionError`  | `10 / 0`                            |
+| `ValueError`         | `int("abc")`                        |
+| `TypeError`          | `"abc" + 5`                         |
+| `IndexError`         | `lst[10]` when list has <10 items   |
+| `KeyError`           | `dict['missing_key']`               |
+| `FileNotFoundError`  | `open('nofile.txt')`                |
+| `ImportError`        | `import unknown_module`             |
+| `AttributeError`     | `None.some_method()`                |
+
+---
+
+### 🔹 4. Exception Handling Basics
+
+#### ✅ Try–Except Block
+```python
+try:
+    x = int(input("Enter a number: "))
+except ValueError:
+    print("Invalid input! Please enter a number.")
+```
+
+#### ✅ Multiple Exceptions
+```python
+try:
+    f = open('data.txt')
+    print(10 / 0)
+except FileNotFoundError:
+    print("File not found.")
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+```
+
+---
+
+### 🔹 5. Else and Finally Blocks
+
+| Block     | Purpose                                      |
+|-----------|----------------------------------------------|
+| `else`    | Runs if no exception occurs                  |
+| `finally` | Always runs — cleanup, closing files, etc.   |
+
+#### ✅ Example
+```python
+try:
+    f = open('data.txt', 'r')
+    content = f.read()
+except FileNotFoundError:
+    print("Missing file.")
+else:
+    print("File read successfully.")
+finally:
+    print("Closing file.")
+```
+
+---
+
+### 🔹 6. Custom Exceptions
+
+#### ✅ Define Your Own
+```python
+class InvalidAgeError(Exception):
+    pass
+
+def validate_age(age):
+    if age < 0:
+        raise InvalidAgeError("Age cannot be negative")
+```
+
+---
+
+### 🔹 7. Real-Time Use Case: Form Validator
+
+```python
+def validate_form(name, age):
+    if not name:
+        raise ValueError("Name is required")
+    if age < 0:
+        raise ValueError("Age must be positive")
+
+try:
+    validate_form("Saibabu", -1)
+except ValueError as e:
+    print("Validation failed:", e)
+```
+
+---
+
+### 🔹 8. Best Practices
+
+- Be specific with exceptions (`except ValueError`, not just `except`)
+- Use `finally` for cleanup (closing files, releasing resources)
+- Avoid catching all exceptions unless absolutely necessary
+- Log exceptions for debugging in real-world apps
+
+---
+
+### 🧠 Summary Table
+
+| Concept             | Example                            | Use Case                          |
+|---------------------|-------------------------------------|-----------------------------------|
+| `try–except`         | Catch input errors                  | User form validation              |
+| `finally`            | Close file/database connection      | Resource cleanup                  |
+| `custom exception`   | `raise InvalidAgeError()`           | Business rule enforcement         |
+| `multiple except`    | Handle different error types        | File + math operations            |
+
+---
+
+Would you like this turned into a Copilot Page for reuse and editing? Or shall we build a mini project like a **form validator with exception logging** next?
