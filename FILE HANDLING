@@ -293,11 +293,105 @@ update_grades('students.csv')
 
 ---
 
-### 🔹 8. Mini Project Idea: Attendance Tracker
+Absolutely, Saibabu! Let’s explore **Advanced File Pointer Control** — a powerful technique for navigating and manipulating file content precisely. This is especially useful when working with large files, logs, or binary data.
 
-- Input: `attendance.csv` with `Name`, `Date`, `Status`
-- Output: Summary of present/absent counts per student
-- Bonus: Export summary to `summary.csv`
+---
 
-Want me to build this mini project with you next? Or turn this CSV guide into a Copilot Page so you can edit and expand it?
+## 🧭 9. Advanced: File Pointer Control in Python
 
+### 🔹 What Is a File Pointer?
+A **file pointer** is the current position in the file where reading or writing will happen. Python lets you control this using:
+
+- `f.tell()` → Get current position
+- `f.seek(offset, whence)` → Move pointer
+
+---
+
+### 🔹 `f.tell()` — Get Current Position
+
+```python
+with open('data.txt', 'r') as f:
+    print(f.read(5))       # Reads first 5 characters
+    print(f.tell())        # Shows position (should be 5)
+```
+
+---
+
+### 🔹 `f.seek(offset, whence)` — Move Pointer
+
+| `whence` | Meaning                     |
+|----------|-----------------------------|
+| `0`      | From start of file          |
+| `1`      | From current position       |
+| `2`      | From end of file            |
+
+#### ✅ Example: Move to Start
+```python
+f.seek(0)  # Move to beginning
+```
+
+#### ✅ Example: Skip First 10 Bytes
+```python
+f.seek(10, 0)  # Move 10 bytes from start
+```
+
+#### ✅ Example: Move Backwards
+```python
+f.seek(-5, 2)  # Move 5 bytes before end
+```
+
+---
+
+### 🔹 Real-Time Use Case: Read Last N Characters of a File
+
+```python
+def read_last_chars(file_path, n):
+    with open(file_path, 'rb') as f:
+        f.seek(-n, 2)  # Move to n bytes before end
+        return f.read().decode()
+
+print(read_last_chars('log.txt', 50))
+```
+
+---
+
+### 🔹 Use Case: Skip Header and Read Data
+
+```python
+with open('report.txt', 'r') as f:
+    f.readline()         # Skip header
+    f.seek(f.tell())     # Confirm position
+    for line in f:
+        print(line.strip())
+```
+
+---
+
+### 🔹 Use Case: Overwrite Specific Part of a File
+
+```python
+with open('data.txt', 'r+') as f:
+    f.seek(10)           # Move to position 10
+    f.write("UPDATED")   # Overwrite from there
+```
+
+---
+
+### 🔹 Binary File Navigation
+
+```python
+with open('image.jpg', 'rb') as f:
+    f.seek(1000)         # Jump to byte 1000
+    chunk = f.read(100)  # Read next 100 bytes
+```
+
+---
+
+### 🧠 Tips
+- Always use `'rb'` or `'r+'` for binary or overwrite operations.
+- Use `f.seek(0)` to reset pointer before re-reading.
+- Combine with `os.path.getsize()` to navigate large files.
+
+---
+
+Would you like to turn this into a Copilot Page for editing and reuse? Or shall we build a mini project like a **log viewer with seek control** next?
